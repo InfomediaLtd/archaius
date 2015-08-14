@@ -44,7 +44,7 @@ public class MongoDBConfigurationSource implements PolledConfigurationSource {
     private final String collectionName;
     private final MongoClient mongoClient;
 
-    public MongoDBConfigurationSource(String mongoURI, String databaseName, String collectionName) {
+    public MongoDBConfigurationSource(String mongoURI, String databaseName, String collectionName) throws Exception {
         this.databaseName = databaseName;
         this.collectionName = collectionName;
 
