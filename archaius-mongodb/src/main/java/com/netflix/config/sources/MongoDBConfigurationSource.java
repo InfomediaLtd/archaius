@@ -44,16 +44,11 @@ public class MongoDBConfigurationSource implements PolledConfigurationSource {
     private final String collectionName;
     private final MongoClient mongoClient;
 
-    public MongoDBConfigurationSource(String mongoURI, String databaseName, String collectionName) throws Exception {
+    public MongoDBConfigurationSource(String mongoURI, String databaseName, String collectionName) {
         this.databaseName = databaseName;
         this.collectionName = collectionName;
 
-        try {
-            mongoClient = new MongoClient(new MongoClientURI(mongoURI));
-        } catch (Exception e) {
-            log.error("Failed to create a client for MongoDB based on the provided URI for the MongoDBConfigurationSource.", e);
-            throw e;
-        }
+        mongoClient = new MongoClient(new MongoClientURI(mongoURI));
     }
 
     @Override
@@ -77,7 +72,7 @@ public class MongoDBConfigurationSource implements PolledConfigurationSource {
             final FindIterable<Document> documents = collection.find();
             for (Document document : documents) {
                 final Object id = document.get("_id");
-                if (id != null) {
+                if (id != null && document.containsKey("value")) {
                     final Object value = document.get("value");
                     map.put(id.toString(), value);
                 }
