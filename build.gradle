@@ -101,6 +101,7 @@ project(':archaius-mongodb') {
         compile 'org.mongodb:mongo-java-driver:3.0.3'
         testCompile 'junit:junit:4.11'
         testCompile 'org.slf4j:slf4j-simple:1.6.4'
+        testCompile 'de.flapdoodle.embedmongo:de.flapdoodle.embedmongo:1.18'
     }
 }
 
